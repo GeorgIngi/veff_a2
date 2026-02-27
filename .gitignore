@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-Local Backend/node_modules/
+local_backend_a2/node_modules/
 
 # Vite build output
 dist/
