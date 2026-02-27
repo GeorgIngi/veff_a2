@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+Local Backend/node_modules/
+
+# Vite build output
+dist/
+
+# Local backend (not deployed)
+Local Backend/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
