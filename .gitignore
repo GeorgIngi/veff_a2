@@ -1,12 +1,11 @@
 # Dependencies
 node_modules/
-local_backend_a2/node_modules/
 
 # Vite build output
 dist/
 
 # Local backend (not deployed)
-Local Backend/
+local_backend_a2/
 
 # OS files
 .DS_Store
