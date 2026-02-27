@@ -3,7 +3,8 @@ import axios from "axios";
 /* =========================
    CONFIG
 ========================= */
-const API_BASE = "https://veff-2026-quotes.netlify.app/api/v1";
+const QUOTE_API_BASE = "https://veff-2026-quotes.netlify.app/api/v1";
+const LOCAL_API_BASE = "http://localhost:3000/api/v1";
 
 /* =========================
    QUOTE FEATURE
@@ -15,7 +16,7 @@ const API_BASE = "https://veff-2026-quotes.netlify.app/api/v1";
  */
 const loadQuote = async (category = "general") => {
   try {
-    const response = await axios.get(`${API_BASE}/quotes`, {
+    const response = await axios.get(`${QUOTE_API_BASE}/quotes`, {
       params: { category },
     });
     const { quote, author } = response.data;
@@ -50,7 +51,7 @@ const wireQuoteEvents = () => {
 
 const loadTasks = async () => {
   try {
-    const response = await axios.get(`${API_BASE}/tasks`);
+    const response = await axios.get(`${LOCAL_API_BASE}/tasks`);
     const tasks = response.data;
     const taskList = document.querySelector(".task-list");
     taskList.innerHTML = "";
@@ -72,7 +73,7 @@ const renderTask = (task) => {
 
   checkbox.addEventListener("change", async () => {
     try {
-      await axios.patch(`${API_BASE}/tasks/${task.id}`, {
+      await axios.patch(`${LOCAL_API_BASE}/tasks/${task.id}`, {
         finished: checkbox.checked ? 1 : 0,
       });
     } catch (error) {
@@ -96,7 +97,7 @@ const addTask = async () => {
   if (!taskText) return;
 
   try {
-    const response = await axios.post(`${API_BASE}/tasks`, { task: taskText });
+    const response = await axios.post(`${LOCAL_API_BASE}/tasks`, { task: taskText });
     renderTask(response.data);
     input.value = "";
   } catch (error) {
@@ -120,7 +121,7 @@ const wireTaskEvents = () => {
 
 const loadNotes = async () => {
   try {
-    const response = await axios.get(`${API_BASE}/notes`);
+    const response = await axios.get(`${LOCAL_API_BASE}/notes`);
     const textarea = document.getElementById("notes-text");
     textarea.value = response.data.notes;
   } catch (error) {
@@ -138,7 +139,7 @@ const wireNotesEvents = () => {
 
   saveBtn?.addEventListener("click", async () => {
     try {
-      await axios.put(`${API_BASE}/notes`, { notes: textarea.value });
+      await axios.put(`${LOCAL_API_BASE}/notes`, { notes: textarea.value });
       saveBtn.disabled = true;
     } catch (error) {
       console.error("Error saving notes:", error);
